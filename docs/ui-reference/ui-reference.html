@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>社交能力文字陪练 UI Reference</title>
+  <style>
+    :root {
+      --bg: #f7f9f8;
+      --surface: #ffffff;
+      --surface-2: #eef4f1;
+      --line: #dce5e0;
+      --text: #17201b;
+      --muted: #637069;
+      --soft: #87958d;
+      --primary: #176b55;
+      --primary-2: #e1f0eb;
+      --blue: #285f8f;
+      --blue-2: #e4eef7;
+      --warning: #8b5d17;
+      --warning-2: #f6ead5;
+      --danger: #a43d35;
+      --danger-2: #f8e4e2;
+      --shadow: 0 8px 24px rgba(20, 42, 32, 0.08);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; background: #dfe6e2; color: var(--text); }
+    body {
+      display: grid;
+      place-items: start center;
+      padding: 0;
+    }
+
+    .phone {
+      position: relative;
+      width: 390px;
+      height: 844px;
+      overflow: hidden;
+      background: var(--bg);
+      box-shadow: none;
+    }
+
+    .screen {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 18px 18px 0;
+    }
+
+    .statusbar {
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #24312b;
+      margin-bottom: 8px;
+      letter-spacing: 0;
+    }
+
+    .status-icons { display: flex; gap: 5px; align-items: center; color: #46544d; }
+    .dot { width: 4px; height: 4px; border-radius: 50%; background: currentColor; display: inline-block; }
+
+    .topbar {
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .title { font-size: 26px; line-height: 1.2; font-weight: 720; letter-spacing: 0; }
+    .page-title { font-size: 21px; font-weight: 720; line-height: 1.25; }
+    .subtle { font-size: 13px; color: var(--muted); line-height: 1.45; }
+    .tiny { font-size: 11px; color: var(--soft); line-height: 1.35; }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: #35443d;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex: 0 0 auto;
+    }
+
+    .content {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow: hidden;
+      padding-bottom: 82px;
+    }
+
+    .content.no-nav { padding-bottom: 88px; }
+    .content.with-input { padding-bottom: 150px; }
+    .scroll { height: 100%; overflow: hidden; }
+
+    .chips {
+      display: flex;
+      gap: 8px;
+      overflow: hidden;
+      margin: 0 -18px 14px 0;
+      padding-right: 18px;
+    }
+
+    .chip {
+      flex: 0 0 auto;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      display: inline-flex;
+      align-items: center;
+      color: #394842;
+      background: var(--surface);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .chip.active {
+      background: var(--primary-2);
+      border-color: #9bc6b7;
+      color: var(--primary);
+      font-weight: 650;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .card.flat { box-shadow: none; }
+    .card.compact { padding: 12px; margin-bottom: 10px; }
+    .card.selected { border-color: #87b9a8; background: #fbfefd; }
+
+    .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .row.start { align-items: flex-start; }
+    .row.tight { gap: 6px; }
+    .col { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .name { font-size: 16px; line-height: 1.35; font-weight: 700; color: #14221b; }
+    .body { font-size: 13px; color: #4d5b54; line-height: 1.5; }
+    .label {
+      display: inline-flex;
+      height: 24px;
+      align-items: center;
+      padding: 0 8px;
+      border-radius: 6px;
+      background: var(--surface-2);
+      color: #405149;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+    .label.primary { background: var(--primary-2); color: var(--primary); }
+    .label.blue { background: var(--blue-2); color: var(--blue); }
+    .label.warn { background: var(--warning-2); color: var(--warning); }
+    .label.danger { background: var(--danger-2); color: var(--danger); }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+
+    .bottom-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 72px;
+      background: rgba(255, 255, 255, 0.97);
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 7px 14px 10px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 560;
+    }
+
+    .nav-icon {
+      width: 34px;
+      height: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .nav-item.active { color: var(--primary); }
+    .nav-item.active .nav-icon { background: var(--primary-2); }
+
+    .fixed-bottom {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn {
+      height: 44px;
+      border: 0;
+      border-radius: 8px;
+      padding: 0 16px;
+      font-size: 15px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      white-space: nowrap;
+    }
+    .btn.primary { background: var(--primary); color: #fff; }
+    .btn.secondary { background: var(--surface); color: var(--primary); border: 1px solid #a6cdbf; }
+    .btn.ghost { background: #edf4f1; color: #2b594b; border: 1px solid #d7e5df; }
+    .btn.danger { background: var(--danger-2); color: var(--danger); border: 1px solid #efc4bf; }
+    .btn.fill { flex: 1 1 auto; }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 720;
+      margin: 16px 0 8px;
+      color: #1d2a24;
+    }
+
+    .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .info-cell {
+      background: #f7faf8;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 11px;
+      min-height: 72px;
+    }
+    .info-label { font-size: 11px; color: var(--soft); margin-bottom: 5px; }
+    .info-value { font-size: 14px; font-weight: 650; line-height: 1.35; color: #203128; }
+
+    .chat-head {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .chat-list { display: flex; flex-direction: column; gap: 10px; }
+    .message { display: flex; gap: 8px; max-width: 86%; }
+    .message.ai { align-self: flex-start; }
+    .message.me { align-self: flex-end; flex-direction: row-reverse; }
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: var(--blue-2);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex: 0 0 auto;
+      margin-top: 2px;
+    }
+    .message.me .avatar { background: var(--primary-2); color: var(--primary); }
+    .bubble {
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      line-height: 1.5;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+    .message.me .bubble {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .typing { display: flex; gap: 4px; padding: 4px 0; }
+    .typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #9aa8a1;
+      display: block;
+    }
+
+    .input-area {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 14px 14px;
+      background: rgba(247, 249, 248, 0.98);
+      border-top: 1px solid var(--line);
+    }
+    .text-input {
+      min-height: 46px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 8px 0 13px;
+      gap: 8px;
+      color: var(--soft);
+      font-size: 14px;
+    }
+    .send {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 0;
+      color: #fff;
+      background: var(--primary);
+      font-size: 16px;
+    }
+    .input-secondary { margin-top: 9px; height: 38px; width: 100%; font-size: 14px; }
+
+    .score-ring {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 8px solid var(--primary-2);
+      display: grid;
+      place-items: center;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 20px;
+      flex: 0 0 auto;
+      background: #fff;
+    }
+    .metric { display: grid; grid-template-columns: 76px 1fr 32px; align-items: center; gap: 8px; margin: 10px 0; }
+    .metric-name { font-size: 13px; color: #394841; }
+    .bar { height: 8px; border-radius: 4px; background: #e7eee9; overflow: hidden; }
+    .bar span { display: block; height: 100%; border-radius: 4px; background: var(--primary); }
+    .metric-val { font-size: 12px; color: var(--muted); text-align: right; }
+    .problem-list { display: flex; flex-direction: column; gap: 8px; }
+    .problem { display: flex; gap: 8px; font-size: 13px; color: #44544c; line-height: 1.45; }
+    .problem::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--warning); margin-top: 7px; flex: 0 0 auto; }
+
+    .quote {
+      background: #f5f8f6;
+      border-left: 3px solid #9ac2b5;
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: #304039;
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 8px 0;
+    }
+
+    .history-score {
+      width: 46px;
+      height: 46px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--primary);
+      background: var(--primary-2);
+      flex: 0 0 auto;
+    }
+    .delete-zone {
+      width: 52px;
+      height: 72px;
+      border-radius: 8px;
+      background: var(--danger-2);
+      color: var(--danger);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      flex: 0 0 auto;
+    }
+
+    .phrase {
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 650;
+      color: #1f2c26;
+    }
+    .mini-actions { display: flex; gap: 6px; flex: 0 0 auto; }
+    .mini-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #47564f;
+      display: grid;
+      place-items: center;
+      font-size: 15px;
+    }
+
+    .field {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 9px 12px;
+      min-height: 58px;
+      margin-bottom: 10px;
+    }
+    .field label { display: block; color: var(--muted); font-size: 12px; margin-bottom: 5px; }
+    .field .value { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #1f2c26; font-size: 14px; min-width: 0; }
+    .field .placeholder { color: #99a49e; }
+    .status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--warning);
+      background: var(--warning-2);
+      border: 1px solid #edd4a7;
+      border-radius: 8px;
+      padding: 11px 12px;
+      font-size: 13px;
+      margin: 10px 0 14px;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      height: calc(100% - 90px);
+      padding-bottom: 18px;
+    }
+    .state-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+      min-height: 0;
+    }
+    .state-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      background: #eef4f1;
+      color: var(--primary);
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+    .state-card h3 { margin: 0 0 6px; font-size: 16px; line-height: 1.25; }
+    .state-card p { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .state-card .btn { width: 100%; height: 36px; font-size: 13px; margin-top: 10px; }
+
+    .flow-canvas {
+      width: 1200px;
+      height: 800px;
+      background: var(--bg);
+      padding: 38px 46px;
+      overflow: hidden;
+      font-family: inherit;
+    }
+    .flow-title { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; }
+    .flow-title h1 { font-size: 30px; margin: 0 0 8px; letter-spacing: 0; }
+    .flow-title p { margin: 0; color: var(--muted); font-size: 15px; }
+    .flow-legend { display: flex; gap: 10px; color: var(--muted); font-size: 13px; }
+    .legend-dot { width: 11px; height: 11px; border-radius: 3px; display: inline-block; margin-right: 5px; vertical-align: -1px; }
+    .flow-map {
+      position: relative;
+      height: 650px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.54);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .flow-node {
+      position: absolute;
+      width: 180px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .flow-node.primary { border-color: #91bfb0; background: #fbfefd; }
+    .flow-node.secondary { border-color: #b8cce0; }
+    .flow-node h2 { font-size: 17px; margin: 0 0 8px; line-height: 1.25; }
+    .flow-node p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.45; }
+    .flow-badge { display: inline-flex; height: 22px; padding: 0 7px; border-radius: 6px; align-items: center; background: var(--surface-2); color: #405149; font-size: 11px; margin-bottom: 9px; }
+    .line {
+      position: absolute;
+      background: #9db5ab;
+      height: 2px;
+      transform-origin: left center;
+    }
+    .line::after {
+      content: "";
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      border-left: 8px solid #9db5ab;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
+    .line.dashed {
+      background: repeating-linear-gradient(90deg, #a9b8c6 0 8px, transparent 8px 14px);
+    }
+    .line.dashed::after { border-left-color: #a9b8c6; }
+    .flow-note {
+      position: absolute;
+      right: 28px;
+      bottom: 24px;
+      width: 230px;
+      padding: 13px;
+      border-radius: 8px;
+      background: #f2f7f4;
+      border: 1px solid #d7e5df;
+      color: #3d4f47;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    const root = document.getElementById("root");
+    const screenId = new URLSearchParams(location.search).get("screen") || "01";
+
+    const status = `<div class="statusbar"><span>9:41</span><span class="status-icons"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>87%</span></span></div>`;
+    const nav = (active) => `
+      <nav class="bottom-nav">
+        ${["练习", "复盘", "表达库"].map((item, index) => {
+          const icon = ["习", "盘", "库"][index];
+          return `<div class="nav-item ${active === item ? "active" : ""}"><div class="nav-icon">${icon}</div><div>${item}</div></div>`;
+        }).join("")}
+      </nav>`;
+
+    const labels = (items) => `<div class="tags">${items.map(([text, cls = ""]) => `<span class="label ${cls}">${text}</span>`).join("")}</div>`;
+    const metric = (name, value) => `<div class="metric"><div class="metric-name">${name}</div><div class="bar"><span style="width:${value * 10}%"></span></div><div class="metric-val">${value}.0</div></div>`;
+
+    function phone(inner, navActive = "", extra = "") {
+      root.innerHTML = `<main class="phone" data-screen="${screenId}"><section class="screen">${status}${inner}</section>${navActive ? nav(navActive) : ""}${extra}</main>`;
+    }
+
+    function page01() {
+      phone(`
+        <div class="topbar"><h1 class="title">练习</h1><button class="icon-btn" aria-label="设置">⚙</button></div>
+        <div class="chips">
+          <span class="chip active">全部</span><span class="chip">陌生人</span><span class="chip">半熟人</span><span class="chip">职场</span><span class="chip">亲戚/饭局</span>
+        </div>
+        <div class="content"><div class="scroll">
+          <article class="card selected">
+            <div class="row start"><div class="col"><div class="name">朋友聚餐里有不熟的人</div><div class="body">朋友带了两位新朋友，你想自然加入聊天，不显得尴尬或过度热情。</div></div><span class="label primary">半熟人</span></div>
+            ${labels([["破冰", "blue"], ["接话", "primary"], ["难度 2/5", "warn"]])}
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">第一次参加公司聚会</div><div class="body">部门聚餐时你坐在不熟的同事旁边，需要维持轻松对话并留下稳妥印象。</div></div><span class="label blue">职场</span></div>
+            ${labels([["职场寒暄", "blue"], ["话题推进", "primary"], ["难度 3/5", "warn"]])}
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">走亲戚被问对象</div><div class="body">饭桌上长辈反复追问感情进展，你希望礼貌回应并把话题转开。</div></div><span class="label warn">亲戚/饭局</span></div>
+            ${labels([["边界感", "primary"], ["转移话题", "blue"], ["难度 4/5", "warn"]])}
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">健身房和邻座聊天</div><div class="body">你们常在同一时间训练，想从点头之交变成能轻松打招呼。</div></div><span class="label">陌生人</span></div>
+            ${labels([["开场", "blue"], ["自然度", "primary"], ["难度 2/5", "warn"]])}
+          </article>
+        </div></div>`, "练习");
+    }
+
+    function page02() {
+      phone(`
+        <div class="topbar"><button class="icon-btn" aria-label="返回">‹</button><div class="page-title">场景详情</div><span style="width:40px"></span></div>
+        <div class="content no-nav"><div class="scroll">
+          <article class="card selected">
+            <span class="label primary">半熟人 · 难度 2/5</span>
+            <h1 class="title" style="font-size:24px;margin:12px 0 8px;">朋友聚餐里有不熟的人</h1>
+            <div class="body">朋友临时带来两位你没见过的人。大家聊得挺热，你想加入，又担心插话太生硬。</div>
+          </article>
+          <div class="section-title">训练信息</div>
+          <div class="info-grid">
+            <div class="info-cell"><div class="info-label">AI 扮演角色</div><div class="info-value">朋友的朋友，性格外向但不主动照顾你</div></div>
+            <div class="info-cell"><div class="info-label">本轮训练目标</div><div class="info-value">自然开场、接住话题、避免冷场</div></div>
+            <div class="info-cell"><div class="info-label">建议轮数</div><div class="info-value">8 轮对话</div></div>
+            <div class="info-cell"><div class="info-label">难度</div><div class="info-value">轻中等，适合热身</div></div>
+          </div>
+          <div class="section-title">可能遇到的问题</div>
+          <article class="card flat compact">
+            <div class="problem-list">
+              <div class="problem">开场只会说“你是做什么的”，显得像查户口。</div>
+              <div class="problem">对方回答较短时，不知道继续追问还是换话题。</div>
+              <div class="problem">想表达观点，但担心插入时机太突兀。</div>
+            </div>
+          </article>
+          <div class="section-title">练习提示</div>
+          <article class="card flat compact"><div class="body">优先选择低压力话题，比如菜品、共同朋友、最近看的内容。每轮只推进一点，不急着表现自己。</div></article>
+        </div></div>`, "", `<div class="fixed-bottom"><button class="btn primary fill">开始练习</button></div>`);
+    }
+
+    function page03() {
+      phone(`
+        <div class="topbar"><button class="icon-btn" aria-label="返回">‹</button><div class="col" style="gap:2px;flex:1"><div class="page-title">朋友聚餐里有不熟的人</div><div class="subtle">AI 角色：朋友的朋友 · 第 3/8 轮</div></div></div>
+        <div class="content with-input"><div class="scroll">
+          <div class="chat-head"><div class="row"><span class="label blue">接话练习</span><span class="tiny">建议：先回应，再轻问一句</span></div></div>
+          <div class="chat-list">
+            <div class="message ai"><div class="avatar">AI</div><div class="bubble">你也是小周的朋友吗？刚刚听你们聊旅行，我还以为你们认识很久了。</div></div>
+            <div class="message me"><div class="avatar">我</div><div class="bubble">对，我和小周是大学同学。你刚才说上个月去了泉州？我一直想找个周末去。</div></div>
+            <div class="message ai"><div class="avatar">AI</div><div class="bubble">是啊，挺适合慢慢逛的。你平时会专门为了吃的去一个城市吗？</div></div>
+            <div class="message me"><div class="avatar">我</div><div class="bubble">会，但我一般先看有没有朋友推荐，不太敢只看榜单。</div></div>
+            <div class="message ai"><div class="avatar">AI</div><div class="bubble"><div class="typing"><span></span><span></span><span></span></div></div></div>
+          </div>
+        </div></div>`, "", `
+        <div class="input-area">
+          <div class="text-input"><span style="flex:1">试着接一句，不用太完整</span><button class="send">➤</button></div>
+          <button class="btn secondary input-secondary">结束并复盘</button>
+        </div>`);
+    }
+
+    function page04() {
+      phone(`
+        <div class="topbar"><button class="icon-btn">‹</button><div class="page-title">复盘结果</div><span style="width:40px"></span></div>
+        <div class="content no-nav"><div class="scroll">
+          <article class="card selected" style="padding:12px;margin-bottom:10px;">
+            <div class="row start"><div class="col"><div class="name">整体表现稳定，可以再练话题推进</div><div class="body">你能自然回应对方。主要问题是追问偏保守，容易停在安全话题。</div></div><div class="score-ring" style="width:62px;height:62px;border-width:7px;font-size:18px;">78</div></div>
+          </article>
+          <article class="card flat compact" style="padding:10px 12px;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+              <div><div class="row"><span class="subtle">敢开口</span><b>8.0</b></div><div class="bar"><span style="width:80%"></span></div></div>
+              <div><div class="row"><span class="subtle">接话能力</span><b>8.0</b></div><div class="bar"><span style="width:80%"></span></div></div>
+              <div><div class="row"><span class="subtle">分寸感</span><b>7.0</b></div><div class="bar"><span style="width:70%"></span></div></div>
+              <div><div class="row"><span class="subtle">话题推进</span><b>6.0</b></div><div class="bar"><span style="width:60%"></span></div></div>
+              <div style="grid-column:1 / span 2;"><div class="row"><span class="subtle">自然度</span><b>8.0</b></div><div class="bar"><span style="width:80%"></span></div></div>
+            </div>
+          </article>
+          <div class="section-title" style="margin-top:10px;">暴露的问题</div>
+          <article class="card flat compact" style="padding:10px 12px;"><div class="problem-list"><div class="problem">对方给出可展开信息时，你有两次提前收住话题。</div><div class="problem">提问很稳，但缺少个人感受，互动温度偏低。</div></div></article>
+          <div class="section-title" style="margin-top:10px;">关键片段分析</div>
+          <article class="card compact" style="padding:11px 12px;">
+            <span class="label warn">第 5 轮</span>
+            <div class="quote" style="margin:6px 0;">“会，但我一般先看有没有朋友推荐。”</div>
+            <div class="body">可以顺手补一个小经历，让对方更容易接。</div>
+            <div class="quote" style="margin:6px 0 0;">更好说法：之前看榜单踩雷过，所以现在更相信朋友推荐。你这次有踩雷吗？</div>
+          </article>
+          <div class="section-title" style="margin-top:10px;">可收藏表达</div>
+          <article class="card compact" style="padding:11px 12px;"><div class="row"><div class="phrase">“我也有点好奇，你当时是怎么选那家店的？”</div><button class="mini-icon">☆</button></div></article>
+        </div></div>`, "", `<div class="fixed-bottom"><button class="btn secondary fill">再练一次</button><button class="btn primary fill">返回场景列表</button></div>`);
+    }
+
+    function page05() {
+      phone(`
+        <div class="topbar"><h1 class="title">复盘</h1><button class="icon-btn">⚙</button></div>
+        <div class="content"><div class="scroll">
+          <article class="card selected">
+            <div class="row start"><div class="col"><div class="name">朋友聚餐里有不熟的人</div><div class="subtle">今天 21:08 · 8 轮对话</div><div class="body">主要问题：话题推进偏保守，缺少个人感受。</div>${labels([["半熟人"], ["自然度较好", "primary"]])}</div><div class="history-score">78</div></div>
+          </article>
+          <div class="row tight" style="margin-bottom:12px;">
+            <article class="card compact" style="margin:0;flex:1;">
+              <div class="row start"><div class="col"><div class="name">第一次参加公司聚会</div><div class="subtle">昨天 19:42 · 6 轮对话</div><div class="body">摘要：回应稳妥，但职场边界不够清晰。</div></div><div class="history-score">72</div></div>
+            </article>
+            <div class="delete-zone"><div>🗑</div><div>删除</div></div>
+          </div>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">走亲戚被问对象</div><div class="subtle">5 月 24 日 12:35 · 7 轮对话</div><div class="body">主要问题：转移话题略硬，容易让对方继续追问。</div>${labels([["亲戚/饭局", "warn"], ["边界感", "primary"]])}</div><div class="history-score">69</div></div>
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">健身房和邻座聊天</div><div class="subtle">5 月 22 日 20:11 · 5 轮对话</div><div class="body">摘要：开场自然，收尾可以更明确一点。</div></div><div class="history-score">83</div></div>
+          </article>
+        </div></div>`, "复盘");
+    }
+
+    function page06() {
+      phone(`
+        <div class="topbar"><button class="icon-btn">‹</button><div class="page-title">历史复盘详情</div><button class="icon-btn" style="color:var(--danger)">🗑</button></div>
+        <div class="content no-nav"><div class="scroll">
+          <article class="card selected"><div class="row start"><div class="col"><div class="name">第一次参加公司聚会</div><div class="subtle">昨天 19:42 · 6 轮对话 · 职场</div><div class="body">总体评价：稳妥但略拘谨。你能回应同事的问题，主动展开较少。</div></div><div class="score-ring">72</div></div></article>
+          <article class="card flat compact">${metric("敢开口", 7)}${metric("接话能力", 7)}${metric("分寸感", 8)}${metric("话题推进", 6)}${metric("自然度", 7)}</article>
+          <div class="section-title">问题</div>
+          <article class="card compact"><div class="problem-list"><div class="problem">对“你刚来还适应吗”的回应过短，没给对方继续聊的入口。</div><div class="problem">提到加班话题时可以更中性，避免太快表达抱怨。</div></div></article>
+          <div class="section-title">关键片段</div>
+          <article class="card compact"><div class="quote">“还行，慢慢适应吧。”</div><div class="body">可以补充一个具体但不敏感的观察，让对方接得住。</div><div class="quote">更好说法：还在适应节奏，不过大家沟通挺直接的，这点我觉得还不错。</div></article>
+          <div class="section-title">推荐表达</div>
+          <article class="card compact"><div class="row"><div class="phrase">“我还在熟悉节奏，不过已经找到一点感觉了。”</div><button class="mini-icon">☆</button></div></article>
+          <article class="card compact"><div class="row"><div><div class="name" style="font-size:15px;">完整对话记录</div><div class="subtle">已收起 · 共 6 轮</div></div><span style="font-size:18px;color:var(--muted)">⌄</span></div></article>
+        </div></div>`, "", `<div class="fixed-bottom"><button class="btn primary fill">再练一次</button></div>`);
+    }
+
+    function page07() {
+      phone(`
+        <div class="topbar"><h1 class="title">表达库</h1><button class="icon-btn">⚙</button></div>
+        <div class="chips">
+          <span class="chip active">全部</span><span class="chip">开场</span><span class="chip">接话</span><span class="chip">拒绝</span><span class="chip">转移话题</span><span class="chip">收尾</span><span class="chip">长辈</span><span class="chip">职场</span>
+        </div>
+        <div class="content"><div class="scroll">
+          <article class="card">
+            <div class="row start"><div class="col"><div class="phrase">“我也有点好奇，你当时是怎么选那家店的？”</div><div>${labels([["接话", "primary"], ["聚餐", "blue"]])}</div><div class="subtle">来源：朋友聚餐里有不熟的人 · 收藏于今天 21:16</div></div><div class="mini-actions"><button class="mini-icon">⧉</button><button class="mini-icon">🗑</button></div></div>
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="phrase">“这个我先不展开说，怕把饭桌气氛带偏。”</div><div>${labels([["拒绝", "warn"], ["长辈", "blue"]])}</div><div class="subtle">来源：走亲戚被问对象 · 收藏于 5 月 24 日</div></div><div class="mini-actions"><button class="mini-icon">⧉</button><button class="mini-icon">🗑</button></div></div>
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="phrase">“我刚加入不久，还在把人和项目对上号。”</div><div>${labels([["开场", "primary"], ["职场", "blue"]])}</div><div class="subtle">来源：第一次参加公司聚会 · 收藏于昨天</div></div><div class="mini-actions"><button class="mini-icon">⧉</button><button class="mini-icon">🗑</button></div></div>
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="phrase">“我先去拿点喝的，等会儿继续听你讲。”</div><div>${labels([["收尾", "primary"], ["聚会"]])}</div><div class="subtle">来源：朋友聚餐里有不熟的人 · 收藏于 5 月 21 日</div></div><div class="mini-actions"><button class="mini-icon">⧉</button><button class="mini-icon">🗑</button></div></div>
+          </article>
+        </div></div>`, "表达库");
+    }
+
+    function page08() {
+      phone(`
+        <div class="topbar"><button class="icon-btn">‹</button><div class="page-title">设置</div><span style="width:40px"></span></div>
+        <div class="content no-nav"><div class="scroll">
+          <div class="section-title" style="margin-top:4px;">模型配置</div>
+          <div class="field"><label>API 地址</label><div class="value">https://api.example.com/v1</div></div>
+          <div class="field"><label>API Key</label><div class="value"><span>sk-••••••••••••••••6Qw</span><span>👁</span></div></div>
+          <div class="field"><label>模型名称</label><div class="value">gpt-4.1-mini</div></div>
+          <div class="status-pill"><span>●</span><span>连接状态：尚未测试，本地配置不会上传。</span></div>
+          <div class="row"><button class="btn primary fill">保存配置</button><button class="btn secondary fill">测试连接</button></div>
+          <div class="section-title">练习偏好</div>
+          <article class="card compact flat"><div class="row"><div><div class="name" style="font-size:15px;">默认建议轮数</div><div class="subtle">新场景开始时默认 8 轮</div></div><span class="label">8 轮</span></div></article>
+          <article class="card compact flat"><div class="row"><div><div class="name" style="font-size:15px;">复盘详细程度</div><div class="subtle">保留关键片段和可收藏表达</div></div><span class="label primary">标准</span></div></article>
+          <div class="section-title">数据管理</div>
+          <article class="card compact"><div class="row"><div><div class="name" style="font-size:15px;">清空练习记录</div><div class="subtle">删除所有历史复盘，表达库不受影响</div></div><button class="btn danger">清空</button></div></article>
+          <article class="card compact"><div class="row"><div><div class="name" style="font-size:15px;">清空表达库</div><div class="subtle">删除已收藏的所有表达</div></div><button class="btn danger">清空</button></div></article>
+        </div></div>`);
+    }
+
+    function page09() {
+      phone(`
+        <div class="topbar"><div><div class="page-title">空状态与异常状态</div><div class="subtle">用于练习、复盘、表达库和设置入口</div></div></div>
+        <div class="state-grid">
+          <section class="state-card"><div><div class="state-mark">□</div><h3>暂无历史记录</h3><p>完成一次对话练习后，这里会保存复盘结果。</p></div><button class="btn primary">去练习</button></section>
+          <section class="state-card"><div><div class="state-mark">☆</div><h3>暂无收藏表达</h3><p>复盘时收藏好用说法，之后可以直接查找。</p></div><button class="btn secondary">浏览场景</button></section>
+          <section class="state-card"><div><div class="state-mark">!</div><h3>API 未配置</h3><p>需要先填写 API 地址、Key 和模型名称。</p></div><button class="btn primary">去设置</button></section>
+          <section class="state-card"><div><div class="state-mark" style="color:var(--danger);background:var(--danger-2)">×</div><h3>网络请求失败</h3><p>请检查网络或模型服务状态，稍后重试。</p></div><button class="btn secondary">重试</button></section>
+        </div>`);
+    }
+
+    function page10() {
+      root.innerHTML = `
+        <main class="flow-canvas" data-screen="10">
+          <div class="flow-title">
+            <div><h1>社交能力文字陪练 App 流程总览</h1><p>从选择练习场景到对话、复盘、收藏表达与查看历史的主路径。</p></div>
+            <div class="flow-legend"><span><i class="legend-dot" style="background:#e1f0eb"></i>主流程</span><span><i class="legend-dot" style="background:#e4eef7"></i>沉淀内容</span><span><i class="legend-dot" style="background:#f6ead5"></i>配置/异常</span></div>
+          </div>
+          <section class="flow-map">
+            <div class="flow-node primary" style="left:50px;top:70px;"><span class="flow-badge">练习 Tab</span><h2>场景列表</h2><p>分类筛选，浏览场景卡片，进入详情。</p></div>
+            <div class="flow-node primary" style="left:310px;top:70px;"><span class="flow-badge">确认目标</span><h2>场景详情</h2><p>查看背景、AI 角色、目标、难度和建议轮数。</p></div>
+            <div class="flow-node primary" style="left:570px;top:70px;"><span class="flow-badge">核心练习</span><h2>对话练习</h2><p>AI 左侧消息，用户输入回复，可随时结束复盘。</p></div>
+            <div class="flow-node primary" style="left:830px;top:70px;"><span class="flow-badge">练后反馈</span><h2>复盘结果</h2><p>维度评分、问题、片段分析、推荐表达。</p></div>
+            <div class="flow-node secondary" style="left:830px;top:330px;"><span class="flow-badge">表达沉淀</span><h2>表达库</h2><p>收藏、复制、删除表达，按标签筛选。</p></div>
+            <div class="flow-node secondary" style="left:570px;top:330px;"><span class="flow-badge">复盘 Tab</span><h2>历史记录</h2><p>查看练习时间、评分、问题摘要和轮数。</p></div>
+            <div class="flow-node secondary" style="left:310px;top:330px;"><span class="flow-badge">详情回看</span><h2>历史复盘详情</h2><p>重看评分、关键片段、推荐表达和完整对话。</p></div>
+            <div class="flow-node" style="left:50px;top:330px;border-color:#e3cc9f;background:#fffdf8;"><span class="flow-badge">设置入口</span><h2>设置</h2><p>配置 API、测试连接、清空练习记录或表达库。</p></div>
+            <div class="flow-node" style="left:310px;top:520px;border-color:#e3cc9f;background:#fffdf8;"><span class="flow-badge">异常处理</span><h2>空状态/异常</h2><p>无记录、无收藏、API 未配置、网络失败。</p></div>
+            <div class="line" style="left:230px;top:142px;width:80px;"></div>
+            <div class="line" style="left:490px;top:142px;width:80px;"></div>
+            <div class="line" style="left:750px;top:142px;width:80px;"></div>
+            <div class="line" style="left:920px;top:250px;width:120px;transform:rotate(90deg);"></div>
+            <div class="line dashed" style="left:830px;top:404px;width:80px;transform:rotate(180deg);"></div>
+            <div class="line dashed" style="left:570px;top:404px;width:80px;transform:rotate(180deg);"></div>
+            <div class="line dashed" style="left:400px;top:330px;width:120px;transform:rotate(-90deg);"></div>
+            <div class="line dashed" style="left:140px;top:330px;width:120px;transform:rotate(-90deg);"></div>
+            <div class="line dashed" style="left:400px;top:520px;width:120px;transform:rotate(-90deg);"></div>
+            <div class="flow-note">底部导航固定为“练习 / 复盘 / 表达库”。设置从各主页面右上角进入；异常状态回到对应操作入口。</div>
+          </section>
+        </main>`;
+    }
+
+    const pages = { "01": page01, "02": page02, "03": page03, "04": page04, "05": page05, "06": page06, "07": page07, "08": page08, "09": page09, "10": page10 };
+    (pages[screenId] || page01)();
+  </script>
+</body>
+</html>

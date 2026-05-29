@@ -1,0 +1,266 @@
+[
+  {
+    "id": "S001",
+    "title": "朋友聚餐里有不熟的人",
+    "category": "stranger",
+    "background": "你参加朋友组织的饭局，桌上有一个你第一次见的人。",
+    "userGoal": "自然开场，并尝试找到一个可以继续聊的话题。",
+    "aiRoleName": "朋友的朋友",
+    "aiRoleProfile": "同龄人，态度友好但不主动，回答偏简短。",
+    "difficulty": 2,
+    "openingMessage": "你好像是第一次跟我们一起吃饭吧？你和小陈怎么认识的？",
+    "challengePoints": [
+      "对方回答简短",
+      "对方把问题抛回给用户",
+      "可能出现短暂冷场"
+    ],
+    "evaluationFocus": [
+      "开场是否自然",
+      "是否能延展话题",
+      "是否避免查户口式提问"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S002",
+    "title": "和朋友的朋友第一次见面",
+    "category": "stranger",
+    "background": "你和朋友约着出门，朋友临时带来一个你第一次见的人。",
+    "userGoal": "完成自然自我介绍，并在对方开玩笑时稳定接话。",
+    "aiRoleName": "外向但不熟的人",
+    "aiRoleProfile": "说话轻松，喜欢用玩笑试探边界，但没有明显恶意。",
+    "difficulty": 2,
+    "openingMessage": "听小陈说你平时挺宅的，今天怎么被他拉出来了？",
+    "challengePoints": [
+      "对方用玩笑开场",
+      "对方追问个人兴趣",
+      "需要避免过度解释"
+    ],
+    "evaluationFocus": [
+      "自我介绍是否简洁自然",
+      "是否能接住玩笑",
+      "是否能把话题带回轻松方向"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S003",
+    "title": "活动中坐在陌生人旁边",
+    "category": "stranger",
+    "background": "你参加一个线下活动，入座后旁边坐着一个完全陌生的人。",
+    "userGoal": "用低压力方式开场，找到和现场活动有关的话题。",
+    "aiRoleName": "同桌陌生人",
+    "aiRoleProfile": "礼貌但慢热，对活动感兴趣，回答不会特别主动展开。",
+    "difficulty": 1,
+    "openingMessage": "这个位置有人吗？我也是第一次来这个活动。",
+    "challengePoints": [
+      "不知道从什么话题开始",
+      "对方回答礼貌但简短",
+      "需要避免直接问太私人的问题"
+    ],
+    "evaluationFocus": [
+      "开场压力是否足够低",
+      "话题是否贴近当前场景",
+      "是否给对方留下可回答空间"
+    ],
+    "suggestedRounds": 6
+  },
+  {
+    "id": "S004",
+    "title": "新加入一个已经熟悉的小圈子",
+    "category": "semi_acquaintance",
+    "background": "你被朋友带进一个已经很熟的小圈子，大家聊天节奏很快。",
+    "userGoal": "观察正在聊的话题，找到不突兀的加入方式。",
+    "aiRoleName": "小圈子成员",
+    "aiRoleProfile": "和其他人很熟，会提到内部梗，但愿意回应新加入的人。",
+    "difficulty": 3,
+    "openingMessage": "刚才我们说的那个梗你可能没听懂，是我们上次出去玩的时候发生的事。",
+    "challengePoints": [
+      "大家有内部梗",
+      "用户不熟悉前情",
+      "需要表达好奇但不打断节奏"
+    ],
+    "evaluationFocus": [
+      "是否能自然承认不了解前情",
+      "是否能顺着已有话题加入",
+      "是否避免强行转移话题"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S005",
+    "title": "和不太熟的同学或同事单独聊天",
+    "category": "semi_acquaintance",
+    "background": "你和一个不太熟的同学或同事临时单独同行，需要聊几分钟。",
+    "userGoal": "避免一问一答式冷场，练习补充细节和轻问题。",
+    "aiRoleName": "半熟同龄人",
+    "aiRoleProfile": "认识你但不熟，愿意聊天，不过不会主动承担太多推进。",
+    "difficulty": 2,
+    "openingMessage": "最近好像经常见你加班，你们那边项目很忙吗？",
+    "challengePoints": [
+      "容易只回答一句话",
+      "话题停在工作或学习表面",
+      "需要适度补充个人感受"
+    ],
+    "evaluationFocus": [
+      "回复是否有信息量",
+      "是否能提出轻量追问",
+      "是否能让对话自然延续"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S006",
+    "title": "老同学多年后见面",
+    "category": "semi_acquaintance",
+    "background": "你多年后和老同学碰面，需要寒暄近况，但不想陷入攀比。",
+    "userGoal": "自然交换近况，并在敏感比较出现时保持舒服分寸。",
+    "aiRoleName": "老同学",
+    "aiRoleProfile": "态度热情，会问近况，也可能不自觉比较工作和生活状态。",
+    "difficulty": 3,
+    "openingMessage": "好久不见啊，你现在在哪边发展？感觉大家变化都挺大的。",
+    "challengePoints": [
+      "对方询问近况",
+      "可能出现职业或收入比较",
+      "沉默时需要自然补话题"
+    ],
+    "evaluationFocus": [
+      "寒暄是否自然",
+      "是否避免过度自我暴露",
+      "是否能把比较话题转成近况交流"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S007",
+    "title": "第一次参加公司聚会",
+    "category": "workplace",
+    "background": "你第一次参加公司聚会，周围是不同部门的同事。",
+    "userGoal": "在工作和生活话题之间保持分寸，尝试融入同事局。",
+    "aiRoleName": "公司同事",
+    "aiRoleProfile": "比你更熟悉公司氛围，友好但会观察你的表达分寸。",
+    "difficulty": 3,
+    "openingMessage": "你来公司也有一阵子了吧？感觉适应得怎么样？",
+    "challengePoints": [
+      "不知道聊工作还是生活",
+      "对公司评价需要谨慎",
+      "需要展示友好但不过度讨好"
+    ],
+    "evaluationFocus": [
+      "分寸感是否稳定",
+      "是否能表达真实但不抱怨",
+      "是否能自然融入同事话题"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S008",
+    "title": "和领导或前辈同桌吃饭",
+    "category": "workplace",
+    "background": "你在饭局上和领导或前辈同桌，需要回应关心和提问。",
+    "userGoal": "表达尊重但不过度讨好，稳妥回应工作适应情况。",
+    "aiRoleName": "领导/前辈",
+    "aiRoleProfile": "语气温和但有上下级距离，会询问工作状态和规划。",
+    "difficulty": 4,
+    "openingMessage": "最近工作还适应吗？有没有什么觉得比较吃力的地方？",
+    "challengePoints": [
+      "被问工作适应情况",
+      "需要表达困难但不显得抱怨",
+      "容易过度迎合对方"
+    ],
+    "evaluationFocus": [
+      "是否尊重但不过度讨好",
+      "是否能具体回应问题",
+      "是否能表达改进意愿"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S009",
+    "title": "被同事开玩笑或试探",
+    "category": "workplace",
+    "background": "老员工同事用半开玩笑的方式试探你，你需要稳定回应。",
+    "userGoal": "接住玩笑，守住边界，不把气氛弄僵。",
+    "aiRoleName": "老员工同事",
+    "aiRoleProfile": "熟悉公司人际，喜欢用玩笑测试新人反应。",
+    "difficulty": 4,
+    "openingMessage": "你们新人现在都挺卷啊，是不是准备很快就超过我们这些老员工了？",
+    "challengePoints": [
+      "对方半开玩笑半试探",
+      "话里可能带有竞争意味",
+      "需要避免生硬反驳"
+    ],
+    "evaluationFocus": [
+      "回应是否稳定",
+      "是否能化解试探",
+      "是否保持边界和轻松感"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S010",
+    "title": "走亲戚被问对象",
+    "category": "relative",
+    "background": "你走亲戚时被长辈问起恋爱和婚姻情况。",
+    "userGoal": "委婉回应隐私问题，并把话题自然转走。",
+    "aiRoleName": "亲戚长辈",
+    "aiRoleProfile": "关心但容易追问，认为恋爱婚姻是正常寒暄话题。",
+    "difficulty": 3,
+    "openingMessage": "你现在有对象了吗？年纪也不小了，可以考虑起来了。",
+    "challengePoints": [
+      "被问对象和婚姻",
+      "对方可能持续追问",
+      "需要不失礼貌地设边界"
+    ],
+    "evaluationFocus": [
+      "边界表达是否委婉",
+      "是否避免直接顶撞",
+      "是否能自然转移话题"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S011",
+    "title": "被问工资、买房、未来规划",
+    "category": "relative",
+    "background": "亲戚长辈在饭桌上问起工资、买房和未来规划等私人问题。",
+    "userGoal": "保护隐私，给出体面回应，并把问题转向轻松话题。",
+    "aiRoleName": "亲戚长辈",
+    "aiRoleProfile": "表达直接，容易把隐私问题当作关心，可能继续追问细节。",
+    "difficulty": 4,
+    "openingMessage": "你现在一个月能挣多少？准备什么时候买房啊？",
+    "challengePoints": [
+      "被问收入和买房",
+      "对方持续追问数字细节",
+      "需要避免尴尬沉默或硬怼"
+    ],
+    "evaluationFocus": [
+      "隐私边界是否清楚",
+      "表达是否体面",
+      "转移话题是否自然"
+    ],
+    "suggestedRounds": 8
+  },
+  {
+    "id": "S012",
+    "title": "被劝酒或被强行安排帮忙",
+    "category": "relative_dinner",
+    "background": "饭局上有人劝酒，或借着熟人关系强行安排你帮忙。",
+    "userGoal": "体面拒绝压力请求，同时尽量维持现场气氛。",
+    "aiRoleName": "长辈/熟人",
+    "aiRoleProfile": "说话带压力感，常用给面子、顺手帮忙等理由推进要求。",
+    "difficulty": 4,
+    "openingMessage": "来，喝一点没事的，大家都在呢，多少给个面子。",
+    "challengePoints": [
+      "对方用给面子施压",
+      "拒绝后可能继续劝",
+      "需要提供简短坚定的理由"
+    ],
+    "evaluationFocus": [
+      "拒绝是否清楚",
+      "语气是否体面",
+      "是否能在压力下保持稳定"
+    ],
+    "suggestedRounds": 8
+  }
+]
