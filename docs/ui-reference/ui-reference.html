@@ -742,6 +742,41 @@
         </div></div>`);
     }
 
+    function page11() {
+      phone(`
+        <div class="topbar"><button class="icon-btn">‹</button><div><div class="page-title">模型渠道</div><div class="subtle">对话与复盘可使用不同渠道</div></div><button class="icon-btn">＋</button></div>
+        <div class="content no-nav"><div class="scroll">
+          <article class="card selected">
+            <div class="row start"><div class="col"><div class="name">DeepSeek</div><div class="subtle">OpenAI-compatible · https://api.deepseek.com</div></div><span class="label primary">已启用</span></div>
+            ${labels([["默认对话", "primary"], ["默认复盘", "blue"], ["连接成功", "primary"]])}
+            <div class="info-grid" style="grid-template-columns:1fr;gap:8px;margin-top:10px;">
+              <div class="info-cell" style="min-height:56px;"><div class="info-label">对话模型</div><div class="info-value">deepseek-chat</div></div>
+              <div class="info-cell" style="min-height:56px;"><div class="info-label">复盘模型</div><div class="info-value">deepseek-chat</div></div>
+            </div>
+            <div class="row tight" style="margin-top:12px;"><button class="btn secondary fill">测试</button><button class="btn ghost fill">编辑</button></div>
+          </article>
+          <article class="card">
+            <div class="row start"><div class="col"><div class="name">通义千问/Qwen</div><div class="subtle">OpenAI-compatible · compatible-mode/v1</div></div><span class="label primary">已启用</span></div>
+            ${labels([["备用复盘", "blue"], ["未测试", "warn"]])}
+            <div class="info-grid" style="grid-template-columns:1fr;gap:8px;margin-top:10px;">
+              <div class="info-cell" style="min-height:56px;"><div class="info-label">对话模型</div><div class="info-value">qwen-plus</div></div>
+              <div class="info-cell" style="min-height:56px;"><div class="info-label">复盘模型</div><div class="info-value">qwen-plus</div></div>
+            </div>
+            <div class="row tight" style="margin-top:12px;"><button class="btn secondary fill">设为默认</button><button class="btn ghost fill">编辑</button></div>
+          </article>
+          <article class="card compact">
+            <div class="row"><div><div class="name" style="font-size:15px;">新增渠道</div><div class="subtle">DeepSeek、通义千问、Kimi、智谱、豆包或自定义 OpenAI-compatible</div></div><button class="btn primary">新增</button></div>
+          </article>
+          <div class="section-title">编辑弹窗</div>
+          <article class="card compact flat">
+            <div class="field"><label>展示名称</label><div class="value">DeepSeek</div></div>
+            <div class="field"><label>API Key</label><div class="value"><span>sk-••••••••••••••••9Xk</span><span>👁</span></div></div>
+            <div class="field"><label>对话模型名</label><div class="value">deepseek-chat</div></div>
+            <div class="row tight"><span class="label primary">默认对话</span><span class="label blue">默认复盘</span><span class="label">启用</span></div>
+          </article>
+        </div></div>`);
+    }
+
     function page09() {
       phone(`
         <div class="topbar"><div><div class="page-title">空状态与异常状态</div><div class="subtle">用于练习、复盘、表达库和设置入口</div></div></div>
@@ -784,7 +819,7 @@
         </main>`;
     }
 
-    const pages = { "01": page01, "02": page02, "03": page03, "04": page04, "05": page05, "06": page06, "07": page07, "08": page08, "09": page09, "10": page10 };
+    const pages = { "01": page01, "02": page02, "03": page03, "04": page04, "05": page05, "06": page06, "07": page07, "08": page08, "09": page09, "10": page10, "11": page11 };
     (pages[screenId] || page01)();
   </script>
 </body>

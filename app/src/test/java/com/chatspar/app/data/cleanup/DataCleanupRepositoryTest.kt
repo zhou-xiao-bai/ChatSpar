@@ -190,18 +190,26 @@ class DataCleanupRepositoryTest {
     }
 
     private class FakeApiKeyStore : ApiKeyStore {
-        private var apiKey: String? = null
+        private val apiKeys = mutableMapOf<String, String>()
 
-        override fun saveApiKey(apiKey: String) {
-            this.apiKey = apiKey.ifBlank { null }
+        override fun saveApiKey(alias: String, apiKey: String) {
+            if (apiKey.isBlank()) {
+                clearApiKey(alias)
+            } else {
+                apiKeys[alias] = apiKey
+            }
         }
 
-        override fun getApiKey(): String? {
-            return apiKey
+        override fun getApiKey(alias: String): String? {
+            return apiKeys[alias]
         }
 
-        override fun clearApiKey() {
-            apiKey = null
+        override fun clearApiKey(alias: String) {
+            apiKeys.remove(alias)
+        }
+
+        override fun clearAllApiKeys() {
+            apiKeys.clear()
         }
     }
 

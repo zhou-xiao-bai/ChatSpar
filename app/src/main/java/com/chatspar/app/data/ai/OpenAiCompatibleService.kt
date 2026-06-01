@@ -2,6 +2,7 @@ package com.chatspar.app.data.ai
 
 import com.chatspar.app.data.settings.SettingsRepository
 import com.chatspar.app.data.review.ReviewJsonParser
+import com.chatspar.app.domain.model.AiProviderConfig
 import com.chatspar.app.domain.model.AppSettings
 import com.chatspar.app.domain.model.Review
 import java.io.IOException
@@ -92,6 +93,34 @@ class OpenAiCompatibleService(
         }
     }
 
+    override suspend fun testConnection(
+        providerConfig: AiProviderConfig,
+        apiKey: String,
+    ): AiConnectionResult {
+        return runCatching {
+            val settings = providerConfig.toConnectionTestSettings(apiKey)
+            requestChatCompletion(
+                settings = settings,
+                messages = listOf(
+                    ChatPromptMessage(
+                        role = "user",
+                        content = "请只回复：连接正常",
+                    ),
+                ),
+                maxTokens = 32,
+            )
+            AiConnectionResult(
+                isSuccess = true,
+                message = "连接成功",
+            )
+        }.getOrElse { throwable ->
+            AiConnectionResult(
+                isSuccess = false,
+                message = throwable.toUserMessage(),
+            )
+        }
+    }
+
     private suspend fun requireCompleteSettings(): AppSettings {
         val settings = settingsRepository.getSettings()
         if (
@@ -103,6 +132,21 @@ class OpenAiCompatibleService(
             throw AiServiceException("请先在设置中配置 API 地址、API Key 和模型名称")
         }
         return settings
+    }
+
+    private fun AiProviderConfig.toConnectionTestSettings(apiKey: String): AppSettings {
+        val modelName = chatModelName.ifBlank { reviewModelName }
+        if (apiBaseUrl.isBlank() || apiKey.isBlank() || modelName.isBlank()) {
+            throw AiServiceException("请先填写 API 地址、API Key 和模型名称")
+        }
+        return AppSettings(
+            apiBaseUrl = apiBaseUrl,
+            apiKey = apiKey,
+            modelName = modelName,
+            hasCompletedOnboarding = false,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+        )
     }
 
     private suspend fun requestChatCompletion(

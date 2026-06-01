@@ -1,5 +1,7 @@
 package com.chatspar.app.data.ai
 
+import com.chatspar.app.domain.model.AiProviderConfig
+import com.chatspar.app.domain.model.AiProviderType
 import com.chatspar.app.domain.model.MessageRole
 import com.chatspar.app.domain.model.PracticeMessage
 import com.chatspar.app.domain.model.Scenario
@@ -61,6 +63,17 @@ class FakeAiServiceTest {
         assertTrue(result.message.isNotBlank())
     }
 
+    @Test
+    fun testConnectionWithProvider_returnsSuccess() = runBlocking {
+        val result = service.testConnection(
+            providerConfig = sampleProvider(),
+            apiKey = "sk-test",
+        )
+
+        assertTrue(result.isSuccess)
+        assertTrue(result.message.isNotBlank())
+    }
+
     private fun sampleMessage(): PracticeMessage {
         return PracticeMessage(
             id = "msg_001",
@@ -86,6 +99,23 @@ class FakeAiServiceTest {
             challengePoints = listOf("对方回答简短", "对方把问题抛回给用户"),
             evaluationFocus = listOf("开场是否自然", "是否能延展话题"),
             suggestedRounds = 8,
+        )
+    }
+
+    private fun sampleProvider(): AiProviderConfig {
+        return AiProviderConfig(
+            id = "provider_001",
+            providerType = AiProviderType.OPENAI_COMPATIBLE,
+            displayName = "DeepSeek",
+            apiBaseUrl = "https://api.deepseek.com",
+            apiKeyAlias = "deepseek_key",
+            chatModelName = "deepseek-chat",
+            reviewModelName = "deepseek-chat",
+            isDefaultForChat = true,
+            isDefaultForReview = true,
+            enabled = true,
+            createdAt = FIXED_TIME,
+            updatedAt = FIXED_TIME,
         )
     }
 

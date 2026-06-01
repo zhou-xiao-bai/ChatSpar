@@ -1626,7 +1626,7 @@ UI 参考图：
 
 ### T-501 定义多渠道模型配置
 
-状态：未开始
+状态：已完成
 
 目标：把单一 `AppSettings` 中的 API 配置升级为多渠道模型配置模型。
 
@@ -1694,11 +1694,20 @@ UI 参考图：
 
 - 暂不需要。
 
+完成记录：
+
+- 已新增 `AiProviderConfig`、`AiProviderType`、`AiProviderPreset` 和首批国产模型预设。
+- 已在 DataStore 中增加多渠道配置 JSON 字段。
+- 已在 `SettingsRepository` 中增加多渠道读写、默认对话/复盘渠道读取和旧单一配置 fallback。
+- 现有单一 API 配置保存时会同步生成一个兼容的自定义 OpenAI-compatible 渠道。
+- 已补充设置仓库单元测试，覆盖旧配置迁移、多渠道保存、默认渠道选择和空配置状态。
+- 已通过 `./gradlew test` 和 `./gradlew assembleDebug`。
+
 ---
 
 ### T-502 多 API Key 加密存储
 
-状态：未开始
+状态：已完成
 
 目标：支持按渠道独立保存、读取和删除 API Key。
 
@@ -1753,11 +1762,20 @@ UI 参考图：
 
 - 不需要。
 
+完成记录：
+
+- 已扩展 `ApiKeyStore`，支持按 alias 保存、读取、删除和清空全部 API Key。
+- 已保留旧 `saveApiKey/getApiKey/clearApiKey` 调用，默认映射到 legacy alias。
+- 已更新 Android Keystore 实现，使每个 alias 使用独立密文和 IV。
+- 已保留旧版本单一 preference key 的读取和清理兼容。
+- 已更新测试 Fake KeyStore，并补充多 alias 独立读写、删除和清空测试。
+- 已通过 `./gradlew test` 和 `./gradlew assembleDebug`。
+
 ---
 
 ### T-503 设置页模型渠道管理
 
-状态：未开始
+状态：已完成
 
 目标：把设置页从单一 API 表单升级为模型渠道管理页面。
 
@@ -1835,6 +1853,18 @@ UI 图片提示词：
 ```text
 生成安卓“模型渠道设置”页，顶部标题“模型渠道”，主体是已配置渠道列表，每个渠道卡片显示渠道名称、类型、对话模型、复盘模型、连接状态，并有“测试”“编辑”“设为默认”操作。页面右下角或底部有“新增渠道”按钮。新增渠道弹窗包含 DeepSeek、通义千问、Kimi、智谱、豆包、自定义。Material 3 中文工具型界面。
 ```
+
+完成记录：
+
+- 已将设置页从单一 API 表单升级为模型渠道列表。
+- 已支持 DeepSeek、通义千问/Qwen、Kimi、智谱 GLM、豆包和自定义 OpenAI-compatible 预设入口。
+- 已新增渠道编辑弹窗，支持展示名称、API 地址、API Key、对话模型名、复盘模型名、启用状态和默认用途设置。
+- 已支持启用/禁用、默认对话、默认复盘、删除确认和默认渠道删除提示。
+- 已让 `SettingsRepository.getSettings()` 读取默认对话渠道对应 alias 的 API Key，保证旧 AI 请求入口继续可用。
+- 已扩展 `AiService.testConnection`，支持按单个 provider 配置独立测试连接。
+- 已新增 `docs/ui-reference/11-provider-settings.png` 并更新 `docs/ui-reference/ui-reference.html` 的第 11 页。
+- 已补充设置仓库和 Fake AI 服务测试，覆盖默认渠道归一化、默认渠道 API Key 读取和 provider 测试接口。
+- 已通过 `./gradlew test` 和 `./gradlew assembleDebug`。
 
 ---
 
